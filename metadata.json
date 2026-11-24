@@ -1,0 +1,8 @@
+{
+  "name": "FashTag - Premium Fashion Store & Appointments",
+  "description": "FashTag is a premium clothing and fashion accessories store in BTM 1st Stage, Bengaluru. Explore trendy men's & kids' fashion, western apparel, and book your personalized store shopping visit.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

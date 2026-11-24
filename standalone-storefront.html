@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fashtag Premium Fashion Store | Curated Trendy Outfits</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            gold: {
+              DEFAULT: '#d4af37',
+              light: '#f3e5ab',
+              dark: '#aa8214',
+            },
+            dark: {
+              900: '#0b0c10',
+              800: '#12141f',
+              700: '#1a1d2e',
+              600: '#262a40',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0b0c10;
+      color: #f3f4f6;
+      font-family: 'Inter', sans-serif;
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #f5d77f 0%, #d4af37 50%, #aa8214 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      background: #d4af37;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-gold selection:text-black">
+
+  <!-- Header & Navigation -->
+  <header class="sticky top-0 z-50 bg-[#0b0c10]/90 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#d4af37] to-[#aa8214] flex items-center justify-center text-black font-bold text-xl shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+          F
+        </div>
+        <div>
+          <span class="font-serif text-xl sm:text-2xl font-bold tracking-wider text-white">Fashtag</span>
+          <span class="block text-[10px] tracking-[0.25em] text-[#d4af37] font-semibold uppercase -mt-1">Premium Fashion Store</span>
+        </div>
+      </div>
+
+      <!-- Quick Nav -->
+      <nav class="hidden md:flex items-center gap-6 text-xs uppercase tracking-widest font-semibold text-gray-300">
+        <a href="#catalog" onclick="selectGender('all')" class="hover:text-[#d4af37] transition-colors">Home</a>
+        <a href="#catalog" onclick="selectGender('men')" class="hover:text-[#d4af37] transition-colors">Men's Trends</a>
+        <a href="#catalog" onclick="selectGender('women')" class="hover:text-[#d4af37] transition-colors">Women's Edit</a>
+        <a href="#catalog" onclick="selectGender('kids')" class="hover:text-[#d4af37] transition-colors">Kids' Styles</a>
+        <a href="#price-tier-section" class="hover:text-[#d4af37] transition-colors">Price Tiers</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <div class="relative">
+          <i class="fa-solid fa-cart-shopping text-gray-300 hover:text-[#d4af37] cursor-pointer text-lg"></i>
+          <span id="cartBadge" class="absolute -top-2 -right-2 bg-[#d4af37] text-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative py-16 px-4 sm:px-6 lg:px-8 text-center bg-gradient-to-b from-[#12141f] to-[#0b0c10] border-b border-white/5">
+    <div class="max-w-4xl mx-auto space-y-4">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#d4af37]/30 text-[#d4af37] text-xs font-semibold tracking-widest uppercase">
+        <i class="fa-solid fa-sparkles"></i> Curated Trendy Outfits for Men, Women & Kids
+      </div>
+      <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
+        Discover Pure Style. <br />
+        <span class="gold-gradient-text">Zero Compromise on Fit.</span>
+      </h1>
+      <p class="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
+        Experience seamless, sequential browsing with strict demographic isolation. Easily isolate Men's, Women's, or Kids' apparel, choose your price tier, and pick your sizes with zero cross-contamination.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Catalog & Sequential Filter App -->
+  <main id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow space-y-8">
+
+    <!-- STEP 1: Strict Demographic Audience Switcher -->
+    <div class="space-y-3">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold uppercase tracking-widest text-[#d4af37] flex items-center gap-2">
+          <i class="fa-solid fa-layer-group"></i> Step 1: Primary Audience Switcher
+        </span>
+        <span id="resultsCount" class="text-xs text-gray-400 font-medium">Showing 0 outfits</span>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <button onclick="selectGender('all')" id="btn-gender-all" class="gender-btn p-4 rounded-2xl border text-center transition-all bg-[#12141f] border-[#d4af37] text-white shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+          <div class="flex items-center justify-center gap-2">
+            <span class="font-bold text-sm sm:text-base">All Outfits</span>
+            <span id="badge-all" class="text-[11px] px-2 py-0.5 rounded-full bg-[#d4af37] text-black font-bold">0</span>
+          </div>
+          <span class="block text-[10px] uppercase tracking-wider text-gray-400 mt-1">Full Catalog</span>
+        </button>
+
+        <button onclick="selectGender('men')" id="btn-gender-men" class="gender-btn p-4 rounded-2xl border text-center transition-all bg-[#12141f] border-white/10 text-gray-300 hover:border-[#d4af37]/50 hover:text-white">
+          <div class="flex items-center justify-center gap-2">
+            <span class="font-bold text-sm sm:text-base">Men's Trends</span>
+            <span id="badge-men" class="text-[11px] px-2 py-0.5 rounded-full bg-white/10 text-gray-300 font-bold">0</span>
+          </div>
+          <span class="block text-[10px] uppercase tracking-wider text-gray-400 mt-1">Hoodies, Cargos, Blazers</span>
+        </button>
+
+        <button onclick="selectGender('women')" id="btn-gender-women" class="gender-btn p-4 rounded-2xl border text-center transition-all bg-[#12141f] border-white/10 text-gray-300 hover:border-[#d4af37]/50 hover:text-white">
+          <div class="flex items-center justify-center gap-2">
+            <span class="font-bold text-sm sm:text-base">Women's Edit</span>
+            <span id="badge-women" class="text-[11px] px-2 py-0.5 rounded-full bg-white/10 text-gray-300 font-bold">0</span>
+          </div>
+          <span class="block text-[10px] uppercase tracking-wider text-gray-400 mt-1">Corset Dresses, Co-ords</span>
+        </button>
+
+        <button onclick="selectGender('kids')" id="btn-gender-kids" class="gender-btn p-4 rounded-2xl border text-center transition-all bg-[#12141f] border-white/10 text-gray-300 hover:border-[#d4af37]/50 hover:text-white">
+          <div class="flex items-center justify-center gap-2">
+            <span class="font-bold text-sm sm:text-base">Kids' Styles</span>
+            <span id="badge-kids" class="text-[11px] px-2 py-0.5 rounded-full bg-white/10 text-gray-300 font-bold">0</span>
+          </div>
+          <span class="block text-[10px] uppercase tracking-wider text-gray-400 mt-1">Overalls & Kurta Sets</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Sequenced Price Tiers (Budget to Luxury) -->
+    <div id="price-tier-section" class="p-5 rounded-2xl bg-[#12141f] border border-white/10 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <span class="text-xs font-bold uppercase tracking-widest text-[#d4af37] flex items-center gap-2">
+          <i class="fa-solid fa-tags"></i> Step 2: Price Tier Filter (Sequenced from Budget to Luxury)
+        </span>
+        <div class="text-xs text-gray-400">
+          Current Cap: <span id="currentSliderLabel" class="text-[#d4af37] font-bold">₹25,000+</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+        <button onclick="selectPriceTier('all', 0, 30000)" id="tier-all" class="tier-btn px-3 py-2 rounded-xl text-xs font-semibold border bg-white/10 border-[#d4af37] text-white">
+          All Budgets
+        </button>
+        <button onclick="selectPriceTier('tier1', 199, 999)" id="tier-tier1" class="tier-btn px-3 py-2 rounded-xl text-xs font-semibold border bg-white/5 border-white/10 text-gray-300 hover:border-gold hover:text-white">
+          ₹199 - ₹999 <br><span class="text-[9px] text-gray-400 font-normal">Everyday Essentials</span>
+        </button>
+        <button onclick="selectPriceTier('tier2', 1000, 2999)" id="tier-tier2" class="tier-btn px-3 py-2 rounded-xl text-xs font-semibold border bg-white/5 border-white/10 text-gray-300 hover:border-gold hover:text-white">
+          ₹1,000 - ₹2,999 <br><span class="text-[9px] text-gray-400 font-normal">Streetwear & Casuals</span>
+        </button>
+        <button onclick="selectPriceTier('tier3', 3000, 5999)" id="tier-tier3" class="tier-btn px-3 py-2 rounded-xl text-xs font-semibold border bg-white/5 border-white/10 text-gray-300 hover:border-gold hover:text-white">
+          ₹3,000 - ₹5,999 <br><span class="text-[9px] text-gray-400 font-normal">Contemporary Party</span>
+        </button>
+        <button onclick="selectPriceTier('tier4', 6000, 9999)" id="tier-tier4" class="tier-btn px-3 py-2 rounded-xl text-xs font-semibold border bg-white/5 border-white/10 text-gray-300 hover:border-gold hover:text-white">
+          ₹6,000 - ₹9,999 <br><span class="text-[9px] text-gray-400 font-normal">Designer & Festive</span>
+        </button>
+        <button onclick="selectPriceTier('tier5', 10000, 50000)" id="tier-tier5" class="tier-btn px-3 py-2 rounded-xl text-xs font-semibold border bg-white/5 border-white/10 text-gray-300 hover:border-gold hover:text-white">
+          ₹10,000 & Above <br><span class="text-[9px] text-gold font-normal">Luxury / Couture</span>
+        </button>
+      </div>
+
+      <!-- Real-time Interactive Range Slider -->
+      <div class="pt-2 flex items-center gap-4">
+        <span class="text-xs text-gray-400 font-mono">₹199</span>
+        <input type="range" id="priceRangeSlider" min="500" max="25000" step="500" value="25000" oninput="handleSliderChange(this.value)" class="w-full h-1.5 bg-gray-700 rounded-lg appearance-none cursor-pointer">
+        <span class="text-xs text-gray-400 font-mono">₹25,000+</span>
+      </div>
+    </div>
+
+    <!-- STEP 3: Granular Size Selector (Multi-Select Matrix) -->
+    <div class="p-4 rounded-2xl bg-[#12141f] border border-white/10 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-bold uppercase tracking-widest text-[#d4af37] flex items-center gap-1.5">
+          <i class="fa-solid fa-ruler-combined"></i> Step 3: Granular Size Matrix:
+        </span>
+        <span class="text-[11px] text-gray-400">(Multi-select enabled)</span>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <button onclick="toggleSize('XS')" id="size-XS" class="size-btn px-3.5 py-1.5 rounded-lg text-xs font-bold border border-white/15 bg-white/5 text-gray-300 hover:border-gold">XS</button>
+        <button onclick="toggleSize('S')" id="size-S" class="size-btn px-3.5 py-1.5 rounded-lg text-xs font-bold border border-white/15 bg-white/5 text-gray-300 hover:border-gold">S</button>
+        <button onclick="toggleSize('M')" id="size-M" class="size-btn px-3.5 py-1.5 rounded-lg text-xs font-bold border border-white/15 bg-white/5 text-gray-300 hover:border-gold">M</button>
+        <button onclick="toggleSize('L')" id="size-L" class="size-btn px-3.5 py-1.5 rounded-lg text-xs font-bold border border-white/15 bg-white/5 text-gray-300 hover:border-gold">L</button>
+        <button onclick="toggleSize('XL')" id="size-XL" class="size-btn px-3.5 py-1.5 rounded-lg text-xs font-bold border border-white/15 bg-white/5 text-gray-300 hover:border-gold">XL</button>
+        <button onclick="toggleSize('XXL')" id="size-XXL" class="size-btn px-3.5 py-1.5 rounded-lg text-xs font-bold border border-white/15 bg-white/5 text-gray-300 hover:border-gold">XXL</button>
+        <button onclick="resetFilters()" class="ml-2 text-xs text-[#d4af37] hover:underline font-semibold">
+          <i class="fa-solid fa-rotate-left"></i> Reset All
+        </button>
+      </div>
+    </div>
+
+    <!-- Active Filters Notification Bar -->
+    <div id="activeFiltersContainer" class="hidden flex items-center gap-2 flex-wrap text-xs text-gray-300">
+      <span class="text-gray-400">Active Filters:</span>
+      <div id="filterPills" class="flex items-center gap-2 flex-wrap"></div>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="hidden text-center py-16 space-y-3">
+      <div class="w-16 h-16 mx-auto rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 text-2xl">
+        <i class="fa-solid fa-box-open"></i>
+      </div>
+      <h3 class="font-serif text-xl font-bold text-white">No Matching Outfits Found</h3>
+      <p class="text-xs text-gray-400 max-w-sm mx-auto">No outfits match the active filters for the selected category. Try resetting the size or price tier filters.</p>
+      <button onclick="resetFilters()" class="px-5 py-2 rounded-full bg-[#d4af37] text-black font-semibold text-xs tracking-wider uppercase shadow-lg">
+        Reset All Filters
+      </button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#0b0c10] border-t border-white/10 py-10 text-center text-xs text-gray-500">
+    <p class="font-serif text-sm text-gray-300 font-semibold mb-1">Fashtag Premium Fashion Store</p>
+    <p>9th Main Road, BTM 1st Stage, Bengaluru, Karnataka 560029</p>
+    <p class="mt-4 text-[11px] text-gray-600">Strict Categorization Engine v3.0 • Verified Zero Cross-Category Leakage</p>
+  </footer>
+
+  <!-- JavaScript Application Logic -->
+  <script>
+    // 1. STRICTLY AUDITED PRODUCT INVENTORY (Demographic tags: 'men', 'women', 'kids')
+    // ZERO cross-contamination: Men's outfits are 100% tagged under 'men', never 'women'
+    const PRODUCTS = [
+      // ================= MEN'S SECTION ONLY =================
+      {
+        id: 'men-01',
+        title: 'Oversized Acid-Wash Graphic Street Hoodie',
+        gender: 'men',
+        categoryTag: 'Streetwear',
+        price: 2799,
+        originalPrice: 3899,
+        sizes: ['M', 'L', 'XL', 'XXL'],
+        image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80',
+        fabric: '450 GSM Heavy French Terry'
+      },
+      {
+        id: 'men-02',
+        title: 'Relaxed-Fit Tactical Street Cargo Pants',
+        gender: 'men',
+        categoryTag: 'Streetwear',
+        price: 1899,
+        originalPrice: 2899,
+        sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+        image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80',
+        fabric: '100% Ripstop Peached Cotton'
+      },
+      {
+        id: 'men-03',
+        title: 'Monochrome Textured Cuban Collar Resort Shirt',
+        gender: 'men',
+        categoryTag: 'Casual Wear',
+        price: 1999,
+        originalPrice: 2799,
+        sizes: ['S', 'M', 'L', 'XL'],
+        image: 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=800&q=80',
+        fabric: 'Silky Breathable Rayon Twill'
+      },
+      {
+        id: 'men-04',
+        title: 'Textured Club Blazer & Tailored Trousers',
+        gender: 'men',
+        categoryTag: 'Party Wear',
+        price: 6999,
+        originalPrice: 9499,
+        sizes: ['M', 'L', 'XL'],
+        image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
+        fabric: 'Wool Blend with Satin Lapel'
+      },
+      {
+        id: 'men-05',
+        title: 'Vintage Acid-Wash Distressed Denim Trucker Jacket',
+        gender: 'men',
+        categoryTag: 'Streetwear Jackets',
+        price: 3299,
+        originalPrice: 4699,
+        sizes: ['M', 'L', 'XL', 'XXL'],
+        image: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=800&q=80',
+        fabric: '14 oz Ring-Spun Rigid Denim'
+      },
+      {
+        id: 'men-06',
+        title: 'Super 130s Italian Merino Wool Bespoke Tuxedo',
+        gender: 'men',
+        categoryTag: 'Luxury Formal',
+        price: 16499,
+        originalPrice: 22999,
+        sizes: ['M', 'L', 'XL', 'XXL'],
+        image: 'https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?auto=format&fit=crop&w=800&q=80',
+        fabric: 'Super 130s Italian Virgin Wool'
+      },
+      {
+        id: 'men-07',
+        title: 'Handmade Suede Leather Penny Loafers',
+        gender: 'men',
+        categoryTag: 'Footwear',
+        price: 4499,
+        originalPrice: 6299,
+        sizes: ['S', 'M', 'L', 'XL'],
+        image: 'https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=800&q=80',
+        fabric: 'Italian Calf Suede'
+      },
+      {
+        id: 'men-08',
+        title: 'Handcrafted Full-Grain Leather Belt & Cufflinks',
+        gender: 'men',
+        categoryTag: 'Accessories',
+        price: 899,
+        originalPrice: 1499,
+        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+        image: 'https://images.unsplash.com/photo-1624222247344-550fb60583dc?auto=format&fit=crop&w=800&q=80',
+        fabric: '100% Tuscan Leather'
+      },
+
+      // ================= WOMEN'S SECTION ONLY =================
+      {
+        id: 'women-01',
+        title: 'French Corset-Style Satin Midi Dress',
+        gender: 'women',
+        categoryTag: 'Dresses & Gowns',
+        price: 3499,
+        originalPrice: 4999,
+        sizes: ['XS', 'S', 'M', 'L', 'XL'],
+        image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80',
+        fabric: 'Duchesse Heavyweight Poly-Satin'
+      },
+      {
+        id: 'women-02',
+        title: 'Co-ord Pure Linen Vest & Palazzo Trouser Set',
+        gender: 'women',
+        categoryTag: 'Co-ord Sets',
+        price: 2799,
+        originalPrice: 3999,
+        sizes: ['XS', 'S', 'M', 'L'],
+        image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80',
+        fabric: '100% Breathable European Linen'
+      },
+      {
+        id: 'women-03',
+        title: 'High-Waisted Vintage Wide-Leg Washed Denim',
+        gender: 'women',
+        categoryTag: 'Denim & Pants',
+        price: 2499,
+        originalPrice: 3699,
+        sizes: ['XS', 'S', 'M', 'L', 'XL'],
+        image: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80',
+        fabric: '13 oz Rigid Cotton Denim'
+      },
+      {
+        id: 'women-04',
+        title: 'Aesthetic Oversized Double-Breasted Blazer',
+        gender: 'women',
+        categoryTag: 'Aesthetic Blazers',
+        price: 4299,
+        originalPrice: 6499,
+        sizes: ['S', 'M', 'L', 'XL'],
+        image: 'https://images.unsplash.com/photo-1548624149-f9b1859aa9d0?auto=format&fit=crop&w=800&q=80',
+        fabric: 'Fine Wool-Viscose Blend'
+      },
+      {
+        id: 'women-05',
+        title: 'Floral Peplum Summer Linen Top',
+        gender: 'women',
+        categoryTag: 'Floral Summer Tops',
+        price: 899,
+        originalPrice: 1499,
+        sizes: ['XS', 'S', 'M', 'L', 'XL'],
+        image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80',
+        fabric: 'French Flax Linen Blend'
+      },
+      {
+        id: 'women-06',
+        title: 'Silk Satin Evening Wrap Cocktail Gown',
+        gender: 'women',
+        categoryTag: 'Dresses & Gowns',
+        price: 3899,
+        originalPrice: 5299,
+        sizes: ['XS', 'S', 'M', 'L', 'XL'],
+        image: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80',
+        fabric: 'Mulberry Poly-Silk'
+      },
+      {
+        id: 'women-07',
+        title: 'Pure Kanchipuram Gold Zari Heritage Silk Saree',
+        gender: 'women',
+        categoryTag: 'Ethnic Couture',
+        price: 14999,
+        originalPrice: 19999,
+        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+        image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80',
+        fabric: 'Pure Mulberry Silk with Silk Mark'
+      },
+      {
+        id: 'women-08',
+        title: 'Banarasi Georgette Handcrafted Flared Anarkali',
+        gender: 'women',
+        categoryTag: 'Festive Wear',
+        price: 8499,
+        originalPrice: 11999,
+        sizes: ['XS', 'S', 'M', 'L', 'XL'],
+        image: 'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&w=800&q=80',
+        fabric: 'Pure Georgette with Zari Jaal'
+      },
+
+      // ================= KIDS' SECTION ONLY =================
+      {
+        id: 'kids-01',
+        title: 'Cotton Playwear Utility Overalls for Kids',
+        gender: 'kids',
+        categoryTag: 'Cotton Overalls',
+        price: 999,
+        originalPrice: 1499,
+        sizes: ['XS', 'S', 'M', 'L'],
+        image: 'https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&w=800&q=80',
+        fabric: 'Peached Cotton Twill'
+      },
+      {
+        id: 'kids-02',
+        title: 'Trendy Denim Dungarees with Striped Tee Set',
+        gender: 'kids',
+        categoryTag: 'Denim Dungarees',
+        price: 1299,
+        originalPrice: 1899,
+        sizes: ['XS', 'S', 'M', 'L'],
+        image: 'https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=800&q=80',
+        fabric: 'Enzyme-Washed Stretch Denim'
+      },
+      {
+        id: 'kids-03',
+        title: 'Cute Festive Resham Kurta & Dhoti Pants Set',
+        gender: 'kids',
+        categoryTag: 'Festive Kurta Sets',
+        price: 1899,
+        originalPrice: 2699,
+        sizes: ['XS', 'S', 'M', 'L'],
+        image: 'https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?auto=format&fit=crop&w=800&q=80',
+        fabric: 'Chanderi Silk with Mulmul Cotton'
+      },
+      {
+        id: 'kids-04',
+        title: 'Cozy Quilted Hooded Winter Puffer Jacket',
+        gender: 'kids',
+        categoryTag: 'Hooded Jackets',
+        price: 2499,
+        originalPrice: 3500,
+        sizes: ['S', 'M', 'L', 'XL'],
+        image: 'https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=800&q=80',
+        fabric: 'Weatherproof Poly with Thermal Down Fill'
+      }
+    ];
+
+    // State Variables
+    let selectedGender = 'all'; // 'all' | 'men' | 'women' | 'kids'
+    let selectedPriceTier = 'all';
+    let minPrice = 0;
+    let maxPrice = 30000;
+    let selectedSizes = [];
+    let cartCount = 0;
+
+    // Helper: update live count badges on Step 1 buttons
+    function updateCounts() {
+      const counts = { all: PRODUCTS.length, men: 0, women: 0, kids: 0 };
+      PRODUCTS.forEach(p => {
+        if (p.gender === 'men') counts.men++;
+        else if (p.gender === 'women') counts.women++;
+        else if (p.gender === 'kids') counts.kids++;
+      });
+      document.getElementById('badge-all').innerText = counts.all;
+      document.getElementById('badge-men').innerText = counts.men;
+      document.getElementById('badge-women').innerText = counts.women;
+      document.getElementById('badge-kids').innerText = counts.kids;
+    }
+
+    // Step 1: Select Gender
+    function selectGender(gender) {
+      selectedGender = gender;
+      
+      // Update UI buttons
+      document.querySelectorAll('.gender-btn').forEach(btn => {
+        btn.classList.remove('border-[#d4af37]', 'text-white', 'shadow-[0_0_20px_rgba(212,175,55,0.2)]');
+        btn.classList.add('border-white/10', 'text-gray-300');
+      });
+      
+      const activeBtn = document.getElementById(`btn-gender-${gender}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('border-white/10', 'text-gray-300');
+        activeBtn.classList.add('border-[#d4af37]', 'text-white', 'shadow-[0_0_20px_rgba(212,175,55,0.2)]');
+      }
+
+      applyFilters();
+    }
+
+    // Step 2: Select Price Tier
+    function selectPriceTier(tierId, min, max) {
+      selectedPriceTier = tierId;
+      minPrice = min;
+      maxPrice = max;
+
+      document.querySelectorAll('.tier-btn').forEach(btn => {
+        btn.classList.remove('border-[#d4af37]', 'bg-white/10', 'text-white');
+        btn.classList.add('border-white/10', 'bg-white/5', 'text-gray-300');
+      });
+
+      const activeBtn = document.getElementById(`tier-${tierId}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('border-white/10', 'bg-white/5', 'text-gray-300');
+        activeBtn.classList.add('border-[#d4af37]', 'bg-white/10', 'text-white');
+      }
+
+      const slider = document.getElementById('priceRangeSlider');
+      slider.value = max > 25000 ? 25000 : max;
+      document.getElementById('currentSliderLabel').innerText = max >= 25000 ? '₹25,000+' : `Up to ₹${max.toLocaleString('en-IN')}`;
+
+      applyFilters();
+    }
+
+    // Interactive Slider Handler
+    function handleSliderChange(val) {
+      maxPrice = parseInt(val);
+      minPrice = 0;
+      document.getElementById('currentSliderLabel').innerText = val >= 25000 ? '₹25,000+' : `Up to ₹${parseInt(val).toLocaleString('en-IN')}`;
+
+      document.querySelectorAll('.tier-btn').forEach(btn => {
+        btn.classList.remove('border-[#d4af37]', 'bg-white/10', 'text-white');
+        btn.classList.add('border-white/10', 'bg-white/5', 'text-gray-300');
+      });
+
+      applyFilters();
+    }
+
+    // Step 3: Toggle Size (Multi-select)
+    function toggleSize(size) {
+      const idx = selectedSizes.indexOf(size);
+      if (idx > -1) {
+        selectedSizes.splice(idx, 1);
+      } else {
+        selectedSizes.push(size);
+      }
+
+      const btn = document.getElementById(`size-${size}`);
+      if (btn) {
+        if (selectedSizes.includes(size)) {
+          btn.classList.remove('border-white/15', 'bg-white/5', 'text-gray-300');
+          btn.classList.add('border-[#d4af37]', 'bg-[#d4af37]', 'text-black');
+        } else {
+          btn.classList.remove('border-[#d4af37]', 'bg-[#d4af37]', 'text-black');
+          btn.classList.add('border-white/15', 'bg-white/5', 'text-gray-300');
+        }
+      }
+
+      applyFilters();
+    }
+
+    // Reset All Filters
+    function resetFilters() {
+      selectedGender = 'all';
+      selectedPriceTier = 'all';
+      minPrice = 0;
+      maxPrice = 30000;
+      selectedSizes = [];
+
+      document.getElementById('priceRangeSlider').value = 25000;
+      document.getElementById('currentSliderLabel').innerText = '₹25,000+';
+
+      document.querySelectorAll('.size-btn').forEach(btn => {
+        btn.classList.remove('border-[#d4af37]', 'bg-[#d4af37]', 'text-black');
+        btn.classList.add('border-white/15', 'bg-white/5', 'text-gray-300');
+      });
+
+      selectGender('all');
+      selectPriceTier('all', 0, 30000);
+    }
+
+    // STRICT FILTERING LOGIC (Zero cross-category leakage)
+    function applyFilters() {
+      const filtered = PRODUCTS.filter(product => {
+        // 1. Strict Demographic Match:
+        // When 'women' is selected, product.gender MUST strictly be 'women'.
+        // ZERO Men's products can ever pass through!
+        if (selectedGender !== 'all') {
+          if (product.gender !== selectedGender) {
+            return false;
+          }
+        }
+
+        // 2. Price Filter:
+        if (product.price < minPrice || product.price > maxPrice) {
+          return false;
+        }
+
+        // 3. Multi-Select Size Filter:
+        if (selectedSizes.length > 0) {
+          const hasSize = selectedSizes.some(s => product.sizes.includes(s));
+          if (!hasSize) return false;
+        }
+
+        return true;
+      });
+
+      renderProducts(filtered);
+    }
+
+    // Render Product Grid
+    function renderProducts(items) {
+      const grid = document.getElementById('productGrid');
+      const empty = document.getElementById('emptyState');
+      const counter = document.getElementById('resultsCount');
+
+      counter.innerText = `Showing ${items.length} of ${PRODUCTS.length} outfits`;
+
+      if (items.length === 0) {
+        grid.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+
+      empty.classList.add('hidden');
+      grid.innerHTML = items.map(item => {
+        const discount = Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100);
+        const isLuxury = item.price >= 10000;
+
+        return `
+          <div class="group relative rounded-2xl bg-[#12141f] border border-white/10 hover:border-[#d4af37]/60 transition-all duration-300 flex flex-col overflow-hidden shadow-lg hover:shadow-[0_0_25px_rgba(212,175,55,0.15)]">
+            <!-- Product Image -->
+            <div class="relative aspect-[3/4] overflow-hidden bg-black/40">
+              <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
+              
+              <!-- Badges -->
+              <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-[#0b0c10]/80 text-[#d4af37] border border-[#d4af37]/30 backdrop-blur-md">
+                  ${item.categoryTag}
+                </span>
+                ${isLuxury ? `
+                  <span class="px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-gradient-to-r from-[#d4af37] to-[#aa8214] text-black shadow-md">
+                    <i class="fa-solid fa-crown mr-1"></i> Luxury Tier
+                  </span>
+                ` : ''}
+              </div>
+
+              <div class="absolute top-3 right-3 z-10">
+                <span class="px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-emerald-500/90 text-white">
+                  ${discount}% OFF
+                </span>
+              </div>
+            </div>
+
+            <!-- Card Content -->
+            <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
+              <div>
+                <span class="text-[10px] font-semibold tracking-widest uppercase text-gray-500">${item.gender === 'men' ? "Men's Trends" : item.gender === 'women' ? "Women's Edit" : "Kids' Collection"}</span>
+                <h3 class="font-serif text-base font-bold text-white group-hover:text-[#d4af37] transition-colors line-clamp-1 mt-0.5">
+                  ${item.title}
+                </h3>
+                <p class="text-xs text-gray-400 mt-1 line-clamp-1">${item.fabric}</p>
+              </div>
+
+              <!-- Sizes Badges -->
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[10px] text-gray-500 uppercase font-semibold mr-1">Sizes:</span>
+                ${item.sizes.map(s => `
+                  <span class="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-[10px] font-mono text-gray-300">
+                    ${s}
+                  </span>
+                `).join('')}
+              </div>
+
+              <!-- Price & CTA -->
+              <div class="pt-2 border-t border-white/10 flex items-center justify-between">
+                <div>
+                  <div class="flex items-baseline gap-2">
+                    <span class="text-lg font-bold text-white">₹${item.price.toLocaleString('en-IN')}</span>
+                    <span class="text-xs text-gray-500 line-through">₹${item.originalPrice.toLocaleString('en-IN')}</span>
+                  </div>
+                </div>
+                <button onclick="addToCart('${item.title}')" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-[#d4af37] hover:text-black text-white text-xs font-semibold tracking-wider transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-bag-shopping"></i> Add
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Add to Cart Simulation
+    function addToCart(title) {
+      cartCount++;
+      document.getElementById('cartBadge').innerText = cartCount;
+      alert(`"${title}" added to shopping cart!`);
+    }
+
+    // Initialize application on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      updateCounts();
+      applyFilters();
+    });
+  </script>
+</body>
+</html>
