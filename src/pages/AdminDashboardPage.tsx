@@ -883,7 +883,7 @@ export const AdminDashboardPage: React.FC = () => {
                   </div>
 
                   <a
-                    href={`/shop/${shop.shopId}`}
+                    href={`#/shop/${shop.shopId}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full flex items-center justify-center gap-1.5 py-1.5 text-xs text-[#cfc7b8] hover:text-white bg-[#171926] rounded-lg transition-colors"

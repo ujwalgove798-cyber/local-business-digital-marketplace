@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import React, { useEffect, Component, ErrorInfo, ReactNode } from 'react';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { StoreProvider } from './context/StoreContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { Navbar } from './components/layout/Navbar';
@@ -36,6 +36,41 @@ import { AdminLoginPage } from './pages/AdminLoginPage';
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
+class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; errorMessage: string }> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { hasError: false, errorMessage: '' };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, errorMessage: error.message || 'An unexpected error occurred.' };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('Application error:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen bg-[#0b0c10] text-[#f5f2eb] flex items-center justify-center p-6">
+          <div className="max-w-md w-full bg-[#131522] border border-[#2a2f45] rounded-2xl p-6 text-center space-y-4">
+            <h1 className="text-xl font-bold text-[#d4af37]">Something went wrong</h1>
+            <p className="text-xs text-[#a49f91]">{this.state.errorMessage}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-5 py-2 rounded-full bg-[#d4af37] text-black text-xs font-bold uppercase tracking-wider"
+            >
+              Reload Page
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 // Auto scroll to top on navigation
 const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
@@ -47,13 +82,14 @@ const ScrollToTop: React.FC = () => {
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <StoreProvider>
-        <BrowserRouter>
-        <ScrollToTop />
-        <div className="min-h-screen flex flex-col bg-[#0b0c10] text-[#f5f2eb]">
-          <Navbar />
-          <main className="flex-grow">
+    <ErrorBoundary>
+      <LanguageProvider>
+        <StoreProvider>
+          <HashRouter>
+          <ScrollToTop />
+          <div className="min-h-screen flex flex-col bg-[#0b0c10] text-[#f5f2eb]">
+            <Navbar />
+            <main className="flex-grow">
             <Routes>
               {/* Marketplace Core Routes */}
               <Route path="/" element={<HomePage />} />
@@ -103,8 +139,9 @@ export default function App() {
           <Footer />
           <ToastContainer />
         </div>
-      </BrowserRouter>
+      </HashRouter>
     </StoreProvider>
   </LanguageProvider>
+  </ErrorBoundary>
   );
 }
